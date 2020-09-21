@@ -25,19 +25,22 @@ func Trainer(w http.ResponseWriter, r *http.Request) {
 	SetHeaders(w)
 	vars := mux.Vars(r)
 	trainerName := vars["trainerName"]
-	fmt.Fprintln(w, fileWalk(trainerName, "trainers"))
+	fmt.Fprintln(w, findData(trainerName, "trainers"))
 }
 
 func PokemonSpecific(w http.ResponseWriter, r *http.Request) {
 	SetHeaders(w)
 	vars := mux.Vars(r)
 	pkmnName := vars["pkmnName"]
-	fmt.Fprintln(w, fileWalk(pkmnName, "pokemon"))
+	fmt.Fprintln(w, findData(pkmnName, "pokemon"))
 }
 
-func fileWalk(pkmnName string, datatype string) string {
+func findData(pkmnName string, datatype string) string {
 	var files []string
-	var out string = "["
+	var out string = ""
+	if datatype == "pokemon" {
+		out = "["
+	}
 	var isFirst bool = true
 	root := "data/" + datatype
 	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
@@ -63,6 +66,12 @@ func fileWalk(pkmnName string, datatype string) string {
 			}
 		}
 	}
-	out += "]"
+	if datatype == "pokemon" {
+		out += "]"
+	} else {
+		out = strings.Replace(out, "}", "", 1)
+		out += ",\n\"pokemonData\": " + findData(pkmnName, "pokemon") + " }"
+	}
+
 	return out
 }
