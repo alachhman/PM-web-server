@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/gorilla/mux"
@@ -19,13 +20,14 @@ func SetHeaders(w http.ResponseWriter) {
 
 func Pokemon(w http.ResponseWriter, r *http.Request) {
 	SetHeaders(w)
-	fmt.Fprintln(w, "{\"Pokemon\": 1}")
+	fmt.Fprintln(w, "{\"Pokemon\": " + strconv.Itoa(findCount("pokemon")) + "}")
 }
 func Trainer(w http.ResponseWriter, r *http.Request) {
 	SetHeaders(w)
 	vars := mux.Vars(r)
 	trainerName := vars["trainerName"]
 	fmt.Fprintln(w, findData(trainerName, "trainers"))
+	//Todo: accomodate syncpairs/alts example: christmas rosa
 }
 
 func PokemonSpecific(w http.ResponseWriter, r *http.Request) {
@@ -33,6 +35,23 @@ func PokemonSpecific(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	pkmnName := vars["pkmnName"]
 	fmt.Fprintln(w, findData(pkmnName, "pokemon"))
+}
+
+func findCount (dataType string) int{
+	var files []string
+	var count int
+	root := "data/" + dataType
+	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+		files = append(files, path)
+		return nil
+	})
+	if err != nil {
+		panic(err)
+	}
+	for _, _ = range files {
+		count++
+	}
+	return count
 }
 
 func findData(pkmnName string, datatype string) string {
