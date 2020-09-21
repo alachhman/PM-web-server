@@ -20,14 +20,13 @@ func SetHeaders(w http.ResponseWriter) {
 
 func Pokemon(w http.ResponseWriter, r *http.Request) {
 	SetHeaders(w)
-	fmt.Fprintln(w, "{\"Pokemon\": " + strconv.Itoa(findCount("pokemon")) + "}")
+	fmt.Fprintln(w, "{\"Pokemon\": "+strconv.Itoa(findCount("pokemon"))+"}")
 }
 func Trainer(w http.ResponseWriter, r *http.Request) {
 	SetHeaders(w)
 	vars := mux.Vars(r)
 	trainerName := vars["trainerName"]
 	fmt.Fprintln(w, findData(trainerName, "trainers"))
-	//Todo: accomodate syncpairs/alts example: christmas rosa
 }
 
 func PokemonSpecific(w http.ResponseWriter, r *http.Request) {
@@ -37,7 +36,7 @@ func PokemonSpecific(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, findData(pkmnName, "pokemon"))
 }
 
-func findCount (dataType string) int{
+func findCount(dataType string) int {
 	var files []string
 	var count int
 	root := "data/" + dataType
@@ -70,20 +69,38 @@ func findData(pkmnName string, datatype string) string {
 		panic(err)
 	}
 	for _, file := range files {
-		if strings.Contains(file, pkmnName) {
-			content, err := ioutil.ReadFile(file)
+		if datatype == "pokemon" {
+			if strings.Contains(file, pkmnName) {
+				content, err := ioutil.ReadFile(file)
 
-			if err != nil {
-				log.Fatal(err)
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				if isFirst {
+					out += string(content)
+					isFirst = false
+				} else {
+					out += ", " + string(content)
+				}
 			}
+		} else {
+			if file == "data\\trainers\\" + pkmnName + ".json" {
+				content, err := ioutil.ReadFile(file)
 
-			if isFirst {
-				out += string(content)
-				isFirst = false
-			} else {
-				out += ", " + string(content)
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				if isFirst {
+					out += string(content)
+					isFirst = false
+				} else {
+					out += ", " + string(content)
+				}
 			}
 		}
+
 	}
 	if datatype == "pokemon" {
 		out += "]"
