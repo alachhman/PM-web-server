@@ -1,0 +1,11 @@
+{
+  "name": "Cynthia",
+  "type": "Ground",
+  "info": "#1 Best Girl",
+  "base_potential": 5,
+  "recruit_method": "PokeFair",
+  "pokemon_list": [
+    "Cynthia & Garchomp",
+    "Cynthia & Mega Garchomp"
+  ]
+}
