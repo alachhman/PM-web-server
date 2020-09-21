@@ -23,13 +23,13 @@ var routes = Routes{
 	Route{
 		"Trainer",
 		"GET",
-		"/trainer",
+		"/trainer/{trainerName}",
 		Trainer,
 	},
 	Route{
 		"pkmn",
 		"GET",
-		"/pkmn/{pkmnID}",
+		"/pkmn/{pkmnName}",
 		PokemonSpecific,
 	},
 }
