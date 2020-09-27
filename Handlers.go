@@ -55,11 +55,11 @@ func findCount(dataType string) int {
 
 func findData(pkmnName string, datatype string) string {
 	var files []string
-	var out string = ""
+	var out = ""
 	if datatype == "pokemon" {
 		out = "["
 	}
-	var isFirst bool = true
+	var isFirst = true
 	root := "data/" + datatype
 	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		files = append(files, path)
@@ -100,7 +100,6 @@ func findData(pkmnName string, datatype string) string {
 				}
 			}
 		}
-
 	}
 	if datatype == "pokemon" {
 		out += "]"
