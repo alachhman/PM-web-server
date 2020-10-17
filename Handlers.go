@@ -29,6 +29,11 @@ func Trainer(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, findData(trainerName, "trainers"))
 }
 
+func TrainerList(w http.ResponseWriter, r *http.Request) {
+	SetHeaders(w)
+	fmt.Fprintln(w, getTrainerList())
+}
+
 func PokemonSpecific(w http.ResponseWriter, r *http.Request) {
 	SetHeaders(w)
 	vars := mux.Vars(r)
@@ -51,6 +56,36 @@ func findCount(dataType string) int {
 		count++
 	}
 	return count
+}
+
+func getTrainerList() string {
+	var files []string
+	var out = "{\"trainers\" : ["
+	var isFirst = true
+	root := "data/trainers"
+	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+		files = append(files, path)
+		return nil
+	})
+	if err != nil {
+		panic(err)
+	}
+	for _, file := range files {
+		if isFirst {
+			isFirst = false;
+		} else {
+			content, err := ioutil.ReadFile(file)
+
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			out += string(content) + ","
+		}
+	}
+	out = strings.TrimRight(out, ",")
+	out += "]}"
+	return out
 }
 
 func findData(pkmnName string, datatype string) string {

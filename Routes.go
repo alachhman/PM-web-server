@@ -27,6 +27,12 @@ var routes = Routes{
 		Trainer,
 	},
 	Route{
+		"TrainerList",
+		"GET",
+		"/trainer",
+		TrainerList,
+	},
+	Route{
 		"pkmn",
 		"GET",
 		"/pkmn/{pkmnName}",
