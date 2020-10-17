@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"github.com/gorilla/mux"
 )
@@ -8,6 +9,7 @@ import (
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 	router.Host("www.pokemasdb.com")
+	fmt.Println("Running.")
 	for _, route := range routes {
 		var handler http.Handler
 		handler = route.HandlerFunc
