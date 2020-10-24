@@ -7,7 +7,8 @@ function App() {
             <header className="App-header">
                 <h1>PokemasDB</h1>
                 <p>
-                    A REST API for anyone to pull data on a Pokemon Masters EX Character.
+                    A REST API for anyone to pull data on a Pokemon Masters EX Character. <br/>
+                    Not a Developer? <a href={"https://www.antnee.net"}>Click Here</a>
                 </p>
                 <img src={"/pokeball.png"} alt="logo" style={{height: "30px", width: "30px"}}/>
                 <Highlight language={"javascript"} style={{textAlign: "left", width: "75vw", maxWidth:"900px"}}>
@@ -32,9 +33,3 @@ function App() {
 }
 
 export default App;
-
-const grabTrainer = async () => {
-     return await fetch("http://pokemasdb.com/trainer")
-        .then(response => response.json())
-        .then(json => json.trainers)
-}
