@@ -45,6 +45,12 @@ var routes = Routes{
 		handleFrontEndMedia,
 	},
 	Route{
+		"TrainerList",
+		"GET",
+		"/trainer/list",
+		TrainerList,
+	},
+	Route{
 		"FrontEndFile",
 		"GET",
 		"/{fileName}",
@@ -61,12 +67,6 @@ var routes = Routes{
 		"GET",
 		"/trainer/{trainerName}",
 		Trainer,
-	},
-	Route{
-		"TrainerList",
-		"GET",
-		"/trainer",
-		TrainerList,
 	},
 	Route{
 		"TrainerImage",
