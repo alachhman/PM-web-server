@@ -15,10 +15,10 @@ type Routes []Route
 
 var routes = Routes{
 	Route{
-		"Pokemon",
+		"PokemonCount",
 		"GET",
 		"/pkmn",
-		Pokemon,
+		PokemonCount,
 	},
 	Route{
 		"Trainer",
@@ -33,9 +33,9 @@ var routes = Routes{
 		TrainerList,
 	},
 	Route{
-		"pkmn",
+		"TrainerImage",
 		"GET",
-		"/pkmn/{pkmnName}",
-		PokemonSpecific,
+		"/trainer/image/{imageFileName}",
+		TrainerImage,
 	},
 }

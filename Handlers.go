@@ -13,34 +13,42 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func SetHeaders(w http.ResponseWriter) {
+func SetJsonHeaders(w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 }
 
-func Pokemon(w http.ResponseWriter, r *http.Request) {
-	SetHeaders(w)
+func SetImgHeaders(w http.ResponseWriter) {
+	w.Header().Set("Content-Type", "image/png")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.WriteHeader(http.StatusOK)
+}
+
+func PokemonCount(w http.ResponseWriter, r *http.Request) {
+	SetJsonHeaders(w)
 	fmt.Fprintln(w, "{\"Pokemon\": "+strconv.Itoa(findCount("pokemon"))+"}")
 }
+
 func Trainer(w http.ResponseWriter, r *http.Request) {
-	SetHeaders(w)
+	SetJsonHeaders(w)
 	vars := mux.Vars(r)
 	trainerName := vars["trainerName"]
 	fmt.Fprintln(w, findData(trainerName, "trainers"))
 }
 
 func TrainerList(w http.ResponseWriter, r *http.Request) {
-	SetHeaders(w)
+	SetJsonHeaders(w)
 	fmt.Fprintln(w, getTrainerList())
 }
 
-func PokemonSpecific(w http.ResponseWriter, r *http.Request) {
-	SetHeaders(w)
+func TrainerImage(w http.ResponseWriter, r *http.Request) {
+	SetImgHeaders(w)
 	vars := mux.Vars(r)
-	pkmnName := vars["pkmnName"]
-	fmt.Fprintln(w, findData(pkmnName, "pokemon"))
+	fileName := vars["imageFileName"]
+	http.ServeFile(w, r , "data/trainerImages/" + fileName)
 }
+
 
 func findCount(dataType string) int {
 	var files []string
