@@ -10,15 +10,16 @@ function App() {
                     A REST API for anyone to pull data on a Pokemon Masters EX Character.
                 </p>
                 <img src={"/pokeball.png"} alt="logo" style={{height: "30px", width: "30px"}}/>
-                <Highlight language={"javascript"} style={{textAlign: "left", width: "75vw", maxWidth:"850px"}}>
+                <Highlight language={"javascript"} style={{textAlign: "left", width: "75vw", maxWidth:"900px"}}>
                     {
+                        "const fetch = require(\"node-fetch\");\n\n" +
                         "const grabTrainer = async () => {\n" +
-                        "     trainerUri = \"http://pokemasdb.com/trainer\"\n" +
+                        "     let trainerUri = \"http://pokemasdb.com/trainer\";\n" +
                         "     return await fetch(trainerUri)\n" +
                         "        .then(response => response.json())\n" +
                         "        .then(json => json.trainers)\n" +
-                        "}\n\n" +
-                        "grabTrainer().then(console.log)"
+                        "};\n\n" +
+                        "grabTrainer().then(console.log);"
                     }
                 </Highlight>
                 <img src={"/pokeball.png"} alt="logo" style={{height: "30px", width: "30px"}}/>
