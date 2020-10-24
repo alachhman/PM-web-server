@@ -47,7 +47,7 @@ var routes = Routes{
 	Route{
 		"TrainerList",
 		"GET",
-		"/trainer/list",
+		"/trainer",
 		TrainerList,
 	},
 	Route{
