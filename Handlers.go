@@ -13,42 +13,74 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func SetJsonHeaders(w http.ResponseWriter) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.WriteHeader(http.StatusOK)
-}
-
-func SetImgHeaders(w http.ResponseWriter) {
-	w.Header().Set("Content-Type", "image/png")
+func setHeaders(w http.ResponseWriter, contentType string){
+	w.Header().Set("Content-Type", contentType)
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 }
 
 func PokemonCount(w http.ResponseWriter, r *http.Request) {
-	SetJsonHeaders(w)
+	setHeaders(w, "application/json; charset=UTF-8")
 	fmt.Fprintln(w, "{\"Pokemon\": "+strconv.Itoa(findCount("pokemon"))+"}")
 }
 
 func Trainer(w http.ResponseWriter, r *http.Request) {
-	SetJsonHeaders(w)
+	setHeaders(w, "application/json; charset=UTF-8")
 	vars := mux.Vars(r)
 	trainerName := vars["trainerName"]
 	fmt.Fprintln(w, findData(trainerName, "trainers"))
 }
 
 func TrainerList(w http.ResponseWriter, r *http.Request) {
-	SetJsonHeaders(w)
+	setHeaders(w, "application/json; charset=UTF-8")
 	fmt.Fprintln(w, getTrainerList())
 }
 
 func TrainerImage(w http.ResponseWriter, r *http.Request) {
-	SetImgHeaders(w)
+	setHeaders(w, "image/png")
 	vars := mux.Vars(r)
 	fileName := vars["imageFileName"]
 	http.ServeFile(w, r , "data/trainerImages/" + fileName)
 }
 
+func Home(w http.ResponseWriter, r *http.Request) {
+	setHeaders(w, "text/html; charset=UTF-8")
+	http.ServeFile(w, r, "frontEnd/homepage/build/index.html")
+}
+
+func Favicon(w http.ResponseWriter, r *http.Request) {
+	setHeaders(w, "image/x-icon")
+	http.ServeFile(w, r, "favicon.ico")
+}
+
+func handleFrontEndCss(w http.ResponseWriter, r *http.Request){
+	setHeaders(w, "text/css")
+	vars := mux.Vars(r)
+	fileName := vars["fileName"]
+	http.ServeFile(w, r, "frontEnd/homepage/build/static/css/" + fileName)
+}
+
+func handleFrontEndJs(w http.ResponseWriter, r *http.Request){
+	setHeaders(w,"application/javascript")
+	vars := mux.Vars(r)
+	fileName := vars["fileName"]
+	http.ServeFile(w, r, "frontEnd/homepage/build/static/js/" + fileName)
+}
+
+func handleFrontEndMedia(w http.ResponseWriter, r *http.Request){
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.WriteHeader(http.StatusOK)
+	vars := mux.Vars(r)
+	fileName := vars["fileName"]
+	http.ServeFile(w, r, "frontEnd/homepage/build/static/media/" + fileName)
+}
+
+func handleFrontEndFile(w http.ResponseWriter, r *http.Request){
+	setHeaders(w,"application/javascript")
+	vars := mux.Vars(r)
+	fileName := vars["fileName"]
+	http.ServeFile(w, r, "frontEnd/homepage/build/" + fileName)
+}
 
 func findCount(dataType string) int {
 	var files []string

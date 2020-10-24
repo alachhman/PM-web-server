@@ -15,6 +15,42 @@ type Routes []Route
 
 var routes = Routes{
 	Route{
+		"Home",
+		"GET",
+		"/",
+		Home,
+	},
+	Route{
+		"Favicon",
+		"GET",
+		"/favicon.ico",
+		Favicon,
+	},
+	Route{
+		"FrontEndCss",
+		"GET",
+		"/static/css/{fileName}",
+		handleFrontEndCss,
+	},
+	Route{
+		"FrontEndJs",
+		"GET",
+		"/static/js/{fileName}",
+		handleFrontEndJs,
+	},
+	Route{
+		"FrontEndMedia",
+		"GET",
+		"/static/media/{fileName}",
+		handleFrontEndMedia,
+	},
+	Route{
+		"FrontEndFile",
+		"GET",
+		"/{fileName}",
+		handleFrontEndFile,
+	},
+	Route{
 		"PokemonCount",
 		"GET",
 		"/pkmn",

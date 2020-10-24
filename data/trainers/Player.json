@@ -55,5 +55,6 @@
     "Machoke",
     "Machamp"
   ],
-  "image": "http://pokemasdb.com/trainer/image/Player.png"
+  "image": "http://pokemasdb.com/trainer/image/Player.png",
+  "data": "http://pokemasdb.com/trainer/Player"
 }

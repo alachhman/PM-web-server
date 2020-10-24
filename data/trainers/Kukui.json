@@ -4,5 +4,6 @@
   "pokemon": [
     "Lycanroc"
   ],
-  "image": "http://pokemasdb.com/trainer/image/Kukui.png"
+  "image": "http://pokemasdb.com/trainer/image/Kukui.png",
+  "data": "http://pokemasdb.com/trainer/Kukui"
 }
