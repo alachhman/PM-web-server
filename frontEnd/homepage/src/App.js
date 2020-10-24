@@ -16,7 +16,8 @@ function App() {
                         "     return await fetch(\"http://pokemasdb.com/trainer\")\n" +
                         "        .then(response => response.json())\n" +
                         "        .then(json => json.trainers)\n" +
-                        "}"
+                        "}\n\n" +
+                        "grabTrainer().then(trainers => console.log(trainers))"
                     }
                 </Highlight>
                 <img src={"/pokeball.png"} alt="logo" style={{height: "30px", width: "30px"}}/>
