@@ -50,7 +50,7 @@ EX: http://pokemasdb.com/trainer/image/Red.png
 **Pokemon Images Maybe Coming Soon**
 
 ## Example Usage
-This api can be hit from any language you would like, however here's an example of how to grab the trainer list from the `/trainer` endpoint:
+This api can be hit from any language you would like, however here's an example of how to grab the trainer list from the `/trainer` endpoint using node.js:
 ```javascript
 const fetch = require("node-fetch");
 
