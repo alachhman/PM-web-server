@@ -66,7 +66,8 @@ grabTrainer().then(console.log);
 ## Wrappers
 ### Java
 > [PM4J] (https://github.com/V-Play-Games/PM4J/tree/main)
-Maven repository for use in Java Applications.
+
+Maven repository for use in Java Applications. Has built-in methods for requesting and caching the api's data.
 
 ## Need Help?
 For any additional questions, feature suggestions, or if you want to contribute: 
