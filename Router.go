@@ -9,7 +9,7 @@ import (
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 	//router.Host("localhost")
-	fmt.Println("Running on localhost:8080")
+	fmt.Println("Running on http://localhost:8080/")
 	for _, route := range routes {
 		var handler http.Handler
 		handler = route.HandlerFunc
